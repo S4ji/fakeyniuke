@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<main class="container" id="main">
+{% for message in app.flashes('Success') %}
+<p>{{message}}</p>
+{% endfor %}
+<a href="{{path ('product.new')}}">Ajouter Produit</a>   
+        {% for product in products %}
+            <article class="cardproduct">
+                <h3>{{ product.name }}</h3>
+                <img src="{{ product.picture }}" alt="image de{{ product.name }}">
+                <h4>{{ product.price}}</h4>
+                <p>{{product.description}}</p>
+                <a href="">Voir ce Produit</a></p>
+                <a href="{{path ('product.edit', {id: product.id})}}">Modifier Produit</a>
+                <a href="{{path ('product.delete', {id: product.id})}}">Supprimer Produit</a>     
+            </article>
+        {% endfor %}
+       <div class="navigation">
+    {{ knp_pagination_render(products) }}
+    {{ products.getTotalItemCount }}
+    </div>
+    </main>
+{% endblock %}
+
